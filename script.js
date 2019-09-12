@@ -5,6 +5,12 @@
 
     //Funções
 
+    var sprites = [];
+    var assetsToLoad = [];
+
+    var loadedAssets = 0;
+    
+
     //Variáveis
     var esq = 37, dir = 39, enter = 13, space = 32;
     var mesq = mdir = false;
@@ -62,3 +68,10 @@ function update(){
 function renderizar(){
 
 }
+function loadHandler()
+{
+    loadedAssets++;
+    if(loadedAssets === assetsToLoad.lenght)
+        padrao = pause;
+}
+loop();
