@@ -44,3 +44,21 @@
     }, false);
 }())
 
+function loop(){
+    requestAnimationFrame(loop, a);
+    switch(padrao){
+        case loading:
+            console.log('Loading...');
+            break;
+        case jogando:
+            update();
+            break;
+    }
+    renderizar();
+}
+function update(){
+
+}
+function renderizar(){
+
+}
