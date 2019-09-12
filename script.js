@@ -8,6 +8,11 @@
     var sprites = [];
     var assetsToLoad = [];
 
+    var img = new Image();
+    img.addEventListener('load', loadHandler, false);
+    img.src = "img.png";
+    assetsToLoad.push(img);
+
     var loadedAssets = 0;
     
 
@@ -42,13 +47,19 @@
                 mdir = false;
                 break;
             case enter:
-                if(padrao != jogando)
+                if(padrao !== jogando)
                     padrao = jogando;
                 else
                     padrao = pause;
         }               
     }, false);
 }())
+function loadHandler()
+{
+    loadedAssets++;
+    if(loadedAssets === assetsToLoad.lenght)
+        padrao = pause;
+}
 
 function loop(){
     requestAnimationFrame(loop, a);
@@ -62,16 +73,12 @@ function loop(){
     }
     renderizar();
 }
-function update(){
 
+function update(){
+    alert('update ok');
 }
 function renderizar(){
 
 }
-function loadHandler()
-{
-    loadedAssets++;
-    if(loadedAssets === assetsToLoad.lenght)
-        padrao = pause;
-}
+
 loop();
