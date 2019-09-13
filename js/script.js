@@ -6,14 +6,18 @@
     //Funções
 
     var sprites = [];
-    var assetsToLoad = [ ];
+    var assetsToLoad = [];
 
     var background = new Sprite(0,0,1000,600,0,0);
     sprites.push(background);
 
+    var defender = new Sprite(0,0,30,50,0,0);
+    sprites.push(defender);
+
+
     var img = new Image();
-    img.addEventListener('load', loadHandler, false);
-    img.src = "img/img.jpg";
+    img.addEventListener('load', this.loadHandler, false);
+    img.src = "img/img.css";
     assetsToLoad.push(img);
 
     var loadedAssets = 0;
@@ -58,7 +62,6 @@
                 }
         }               
     }, false);
-}())
 
 function loadHandler()
 {
@@ -71,9 +74,9 @@ function loadHandler()
 function loop(){
     requestAnimationFrame(loop, a);
     switch(padrao){
-        case loading:
-            console.log('Loading...');
-            break;
+       // case loading:
+          //  console.log('Loading...');
+          //  break;
         case jogando:
             update();
             break;
@@ -82,7 +85,18 @@ function loop(){
 }
 
 function update(){
-    alert('update ok');
+    if(mesq !== mdir)
+    {
+        defender.vx = -5;
+    }
+    if(mdir !== mesq)
+    {
+        defender.vx = 5
+    }
+    if(!mdir && !mesq)
+    {
+        defender.vx = 0;
+    }
 }
 function renderizar(){
     b.clearRect(0,0, a.width, a.height);
@@ -94,3 +108,6 @@ function renderizar(){
     }
 }
 loop();
+
+
+}())

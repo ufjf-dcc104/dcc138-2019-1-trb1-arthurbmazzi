@@ -1,4 +1,4 @@
-var Sprite = function(sourceX, sourceY, width, height){
+var Sprite = function(sourceX, sourceY, width, height,x, y){
     this.sourceX = sourceX;
     this.sourceY = sourceY;
     this.width = width;
