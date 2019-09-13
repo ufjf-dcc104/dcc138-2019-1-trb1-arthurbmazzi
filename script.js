@@ -6,7 +6,7 @@
     //Funções
 
     var sprites = [];
-    var assetsToLoad = [];
+    var assetsToLoad = [ ];
 
     var img = new Image();
     img.addEventListener('load', loadHandler, false);
