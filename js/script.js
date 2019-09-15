@@ -1,28 +1,23 @@
 
 (function (){
-    var a = document.querySelector('canvas');
-    var b = a.getContext('2d');
+    var a = document.querySelector("canvas");
+    var b = a.getContext("2d");
 
     //Funções
 
     var sprites = [];
     var assetsToLoad = [];
 
-    var background = new Sprite(0,0,1000,600,0,0);
-    sprites.push(background);
-
-    var defender = new Sprite(0,0,30,50,0,0);
+    var defender = new Sprite(0,0,35,40,0,330);
     sprites.push(defender);
 
-
     var img = new Image();
-    img.addEventListener('load', this.loadHandler, false);
-    img.src = "img/img.css";
+    img.addEventListener("load", loadHandler, false);
+    img.src = "img/img.jpg";
     assetsToLoad.push(img);
 
     var loadedAssets = 0;
     
-
     //Variáveis
     var esq = 37, dir = 39, enter = 13, space = 32;
     var mesq = mdir = false;
@@ -42,7 +37,6 @@
                 mdir = true;
                 break;
         }
-                
     }, false);
     window.addEventListener('keyup', function(e){
         var key = e.keyCode;
@@ -54,7 +48,7 @@
                 mdir = false;
                 break;
             case enter:
-                if(padrao !== jogando){
+                if(padrao != jogando){
                     padrao = jogando;
                 }
                 else{
@@ -63,33 +57,32 @@
         }               
     }, false);
 
-function loadHandler()
-{
+function loadHandler(){
     loadedAssets++;
-    if(loadedAssets === assetsToLoad.length){
-        img.removeEventListener('load', loadHandler, false);
+    if(loadedAssets == assetsToLoad.length){
+        img.removeEventListener("load", loadHandler, false);
         padrao = pause;
     }
 }
 function loop(){
     requestAnimationFrame(loop, a);
     switch(padrao){
-       // case loading:
-          //  console.log('Loading...');
-          //  break;
+        case loading:
+            console.log('Loading...');
+            break;
         case jogando:
             update();
             break;
     }
-    renderizar();
+    render();
 }
 
 function update(){
-    if(mesq !== mdir)
+    if(mesq && !mdir)
     {
         defender.vx = -5;
     }
-    if(mdir !== mesq)
+    if(mdir && !mesq)
     {
         defender.vx = 5
     }
@@ -97,10 +90,12 @@ function update(){
     {
         defender.vx = 0;
     }
+    defender.x = Math.max(0, Math.min(a.width - defender.width, defender.x + defender.vx));
+
 }
-function renderizar(){
+function render(){
     b.clearRect(0,0, a.width, a.height);
-    if(sprites.length !== 0){
+    if(sprites.length != 0){
         for(var i in sprites)
             var spr = sprites[i];
             b.drawImage(img, spr.sourceX, spr.sourceY, spr.width, spr.height, 
