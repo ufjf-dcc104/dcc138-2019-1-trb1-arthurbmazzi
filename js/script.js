@@ -103,10 +103,27 @@ function update(){
     {
         defender.vx = 0;
     }
-    if()
+    if(shoot)
+    {
+        Fire();
+        shoot = false;
+    }
     defender.x = Math.max(0, Math.min(a.width - defender.width, defender.x + defender.vx));
+    for(var i in tiros)
+    {
+        var tiro = tiros[i];
+        tiro.y += tiro.vy;
+    }
 
 }
+function Fire(){
+    var tiro = new Sprite(500, 300, 8, 13, defender.centerX() - 4,
+        defender.y - 13);
+    tiro.vx = -8;
+    sprites.push(tiro);
+    tiros.push(tiro);
+}
+
 function render(){
     b.clearRect(0,0, a.width, a.height);
     if(sprites.length != 0){
