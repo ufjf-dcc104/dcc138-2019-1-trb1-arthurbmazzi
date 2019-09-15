@@ -7,6 +7,7 @@
 
     var sprites = [];
     var assetsToLoad = [];
+    var tiros = [];
 
     var defender = new Sprite(0,0,35,40,0,330);
     sprites.push(defender);
@@ -20,7 +21,8 @@
     
     //Variáveis
     var esq = 37, dir = 39, enter = 13, space = 32;
-    var mesq = mdir = false;
+    var mesq = mdir = shoot = spaceisDown = false;
+
 
     //Estados
     var loading = 0, jogando = 1, pause = 2, gg = 3;
@@ -36,6 +38,14 @@
             case dir:
                 mdir = true;
                 break;
+            case space:
+                if(!spaceisDown)
+                { 
+                    shoot = true;
+                    spaceisDown = true;
+                }
+                break;
+
         }
     }, false);
     window.addEventListener('keyup', function(e){
@@ -54,6 +64,9 @@
                 else{
                     padrao = pause;
                 }
+                break;
+            case space:
+                spaceisDown = false;
         }               
     }, false);
 
@@ -90,6 +103,7 @@ function update(){
     {
         defender.vx = 0;
     }
+    if()
     defender.x = Math.max(0, Math.min(a.width - defender.width, defender.x + defender.vx));
 
 }
