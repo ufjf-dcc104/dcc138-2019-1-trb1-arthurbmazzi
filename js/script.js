@@ -21,7 +21,10 @@
     
     //Variáveis
     var esq = 37, dir = 39, enter = 13, space = 32;
-    var mesq = mdir = shoot = spaceisDown = false;
+    var mesq =false;
+    var mdir =false;
+    var shoot = false;
+    var spaceIsDown = false;
 
 
     //Estados
@@ -39,10 +42,10 @@
                 mdir = true;
                 break;
             case space:
-                if(!spaceisDown)
+                if(!spaceIsDown)
                 { 
                     shoot = true;
-                    spaceisDown = true;
+                    spaceIsDown = true;
                 }
                 break;
 
@@ -66,7 +69,7 @@
                 }
                 break;
             case space:
-                spaceisDown = false;
+                spaceIsDown = false;
         }               
     }, false);
 
@@ -105,21 +108,36 @@ function update(){
     }
     if(shoot)
     {
-        Fire();
+        fire();
         shoot = false;
     }
     defender.x = Math.max(0, Math.min(a.width - defender.width, defender.x + defender.vx));
     for(var i in tiros)
     {
-        var tiro = tiros[i];
-        tiro.y += tiro.vy;
-    }
+        var tiro1 = tiros[i];
+        tiro1.y += tiro1.vy;
+        if(tiro1.y < tiro1.height)
+        {
+            remove(tiro1, tiros);
+            remove(tiro1, sprites);
+            i--;
+        }
 
+    }
 }
-function Fire(){
+function remove(objectToRemove, vetor)
+{
+    var i = vetor.IndexOf(objectToRemove);
+    if(i != -1)
+    {
+        vetor.splice(i, 1);
+    }
+}
+
+function fire(){
     var tiro = new Sprite(500, 300, 8, 13, defender.centerX() - 4,
         defender.y - 13);
-    tiro.vx = -8;
+    tiro.vy = -8;
     sprites.push(tiro);
     tiros.push(tiro);
 }
