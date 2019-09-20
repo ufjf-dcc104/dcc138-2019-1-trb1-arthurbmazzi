@@ -22,3 +22,15 @@ Sprite.prototype.halfWidth = function(){
 Sprite.prototype.halfHeight = function(){
     return this.height/2;
 }
+
+var inimigo = function(sourceX, sourceY, width, height,x,y){
+    Sprite.call(this, sourceX, sourceY, width, height,x,y);
+    this.normal = 1;
+    this.explodiu = 2;
+    this.state = this.normal;
+}
+inimigo.prototype = Object.create(Sprite.prototype);
+inimigo.prototype.explodiu = function(){
+    this.sourceX = 80;
+    this.width = this.height = 56;
+}

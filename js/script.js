@@ -136,6 +136,12 @@ function update(){
     if(enemies > 2) enemies--;
     }
     for(var i in inimigos)
+    {
+        var d = inimigos[i];
+        if(d.state != d.explodiu){
+            d.y += d.vy
+        }
+    }
 }
 function remove(objectToRemove, vetor)
 {
