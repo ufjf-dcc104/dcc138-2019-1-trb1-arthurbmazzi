@@ -1,7 +1,7 @@
 
 (function (){
-    var a = document.querySelector("canvas");
-    var b = a.getContext("2d");
+    var a = document.querySelector('canvas');
+    var b = a.getContext('2d');
 
     //Funções
 
@@ -9,13 +9,16 @@
     var assetsToLoad = [];
     var tiros = [];
 
-    var defender = new Sprite(0,0,35,40,0,330);
+    var background = new Sprite(0,56,400,500,0,0);
+	sprites.push(background);
+
+    var defender = new Sprite(0,0,30,50,185,450);
     sprites.push(defender);
 
     var img = new Image();
-    img.addEventListener("load", loadHandler, false);
-    img.src = "img/img.jpg";
-    assetsToLoad.push(img);
+	img.addEventListener('load',loadHandler,false);
+	img.src = "img/img.png";
+	assetsToLoad.push(img);
 
     var loadedAssets = 0;
     
@@ -76,7 +79,7 @@
 function loadHandler(){
     loadedAssets++;
     if(loadedAssets == assetsToLoad.length){
-        img.removeEventListener("load", loadHandler, false);
+        img.removeEventListener('load', loadHandler, false);
         padrao = pause;
     }
 }
@@ -143,15 +146,15 @@ function fire(){
 }
 
 function render(){
-    b.clearRect(0,0, a.width, a.height);
-    if(sprites.length != 0){
-        for(var i in sprites)
+    b.clearRect(0,0,a.width,a.height);
+    if(sprites.length !== 0){
+        for(var i in sprites){
             var spr = sprites[i];
-            b.drawImage(img, spr.sourceX, spr.sourceY, spr.width, spr.height, 
-                        Math.floor(spr.x), Math.floor(spr.y), spr.width, spr.height);
+            b.drawImage(img,spr.sourceX,spr.sourceY,spr.width,spr.height,Math.floor(spr.x),Math.floor(spr.y),spr.width,spr.height);
+        }
     }
 }
 loop();
 
 
-}())
+}());
