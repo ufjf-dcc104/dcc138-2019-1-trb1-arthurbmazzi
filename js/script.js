@@ -8,6 +8,7 @@
     var sprites = [];
     var assetsToLoad = [];
     var tiros = [];
+    var inimigos = [];
 
     var background = new Sprite(0,56,400,500,0,0);
 	sprites.push(background);
@@ -20,6 +21,8 @@
 	img.src = "img/img.png";
 	assetsToLoad.push(img);
 
+    var enemies = 100;
+    var timer = 0;
     var loadedAssets = 0;
     
     //Variáveis
@@ -29,12 +32,11 @@
     var shoot = false;
     var spaceIsDown = false;
 
-
-    //Estados
+    //Estados do jogo
     var loading = 0, jogando = 1, pause = 2, gg = 3;
     var padrao = loading;
 
-    //Comandos de teclas
+    //teclas
     window.addEventListener('keydown', function(e){
         var key = e.keyCode;
         switch(key){
@@ -119,7 +121,7 @@ function update(){
     {
         var tiro1 = tiros[i];
         tiro1.y += tiro1.vy;
-        if(tiro1.y < tiro1.height)
+        if(tiro1.y < -tiro1.height)
         {
             remove(tiro1, tiros);
             remove(tiro1, sprites);
@@ -127,10 +129,17 @@ function update(){
         }
 
     }
+    timer++; 
+    if(timer = enemies){
+        criaInimigo();
+        timer=0;
+    if(enemies > 2) enemies--;
+    }
+    for(var i in inimigos)
 }
 function remove(objectToRemove, vetor)
 {
-    var i = vetor.IndexOf(objectToRemove);
+    var i = vetor.indexOf(objectToRemove);
     if(i != -1)
     {
         vetor.splice(i, 1);
@@ -138,11 +147,19 @@ function remove(objectToRemove, vetor)
 }
 
 function fire(){
-    var tiro = new Sprite(500, 300, 8, 13, defender.centerX() - 4,
+    var tiro = new Sprite(136,12, 8, 13, defender.centerX() - 4,
         defender.y - 13);
     tiro.vy = -8;
     sprites.push(tiro);
     tiros.push(tiro);
+}
+
+function criaInimigo(){
+    var random = (Math.floor(Math.random() * 8) * 50)
+    var c = new inimigo(30,0,50,50,random,-50);
+    c.vy = 1; 
+    sprites.push(c);
+    inimigos.push(c);
 }
 
 function render(){
