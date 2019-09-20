@@ -129,18 +129,19 @@ function update(){
         }
 
     }
-    timer++; 
-    if(timer = enemies){
+            timer++; 
+    if(timer == enemies){
         criaInimigo();
-        timer=0;
+        timer = 0;
     if(enemies > 2) enemies--;
     }
     for(var i in inimigos)
     {
         var d = inimigos[i];
-        if(d.state != d.explodiu){
+        if(d.state != d.explodiu)
             d.y += d.vy
-        }
+        if(d.y > a.height + d.height)
+            padrao = gg;
     }
 }
 function remove(objectToRemove, vetor)
